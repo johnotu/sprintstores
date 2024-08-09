@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+
 import "./globals.css";
+import { storeDescription, storeName } from "@/utils/data";
+import Header from "@/components/header";
+import Animate from "@/providers/animate";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sprintech Stores",
-  description: "Shop till you melt",
+  title: storeName,
+  description: storeDescription,
 };
 
 export default function RootLayout({
@@ -16,7 +20,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <Animate>
+          <div className="w-full h-screen relative">
+            <Header />
+            {children}
+          </div>
+        </Animate>
+      </body>
     </html>
   );
 }
