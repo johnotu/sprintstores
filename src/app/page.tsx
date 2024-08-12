@@ -3,6 +3,7 @@
 import { storeName } from "@/utils/data";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Home() {
   const line = storeName;
@@ -38,7 +39,7 @@ export default function Home() {
     },
   };
   return (
-    <>
+    <Suspense>
       <div className="absolute top-1/3 z-20 flex flex-col place-items-center w-full">
         <div className="">
           <motion.div
@@ -82,6 +83,6 @@ export default function Home() {
           </motion.div>
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
