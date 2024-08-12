@@ -12,3 +12,5 @@ export interface Product {
   image: string;
   rating: Rating;
 }
+
+export type Category = string;

@@ -5,7 +5,7 @@ export default function CategoriesNav({
   currentCategory,
 }: {
   categories: string[];
-  currentCategory: string;
+  currentCategory: string | null;
 }) {
   return (
     <div className="bg-white rounded-3xl px-5 py-6 shadow-lg w-2/3 md:w-1/2 lg:w-auto">
@@ -14,11 +14,11 @@ export default function CategoriesNav({
         <li>
           <Link
             className={`${
-              currentCategory == "" ? `font-semibold text-cusblack` : ``
+              !currentCategory ? `font-semibold text-cusblack` : ``
             } cursor-pointer capitalize`}
-            href="/store"
+            href="/products"
           >
-            All products
+            All
           </Link>
         </li>
         {categories &&
@@ -30,7 +30,7 @@ export default function CategoriesNav({
                     ? `font-semibold text-cusblack`
                     : ``
                 } cursor-pointer capitalize`}
-                href={`/store?category=${category}`}
+                href={`/products?category=${category}`}
               >
                 {category}
               </Link>

@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Animate>
-          <div className="w-full h-screen relative">
+          <div className="w-full h-screen relative bg-cusgray">
             <Header />
             {children}
           </div>

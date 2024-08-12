@@ -1,32 +1,39 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import useProducts from "./use-products";
 import CategoriesNav from "@/components/categories-nav";
 import SortDropdown from "@/components/sort-dropdown";
 import GridSelector from "@/components/grid-selector";
 import ProductsList from "@/components/products-list";
-// import StoreCarousel from "@/components/store-carousel";
+import StoreCarousel from "@/components/store-carousel";
 import useCategories from "./use-categories";
+import Header from "@/components/header";
+import { useSearchParams } from "next/navigation";
+import TopSearch from "@/components/top-search";
 
 export default function Store() {
   const { products, isLoading } = useProducts();
   const { categories } = useCategories();
 
-  const [openCategoryFilter, setOpenCategoryFilter] = useState<boolean>(false);
+  const [openCategoryMenu, setOpenCategoryMenu] = useState<boolean>(false);
   const [grid, setGrid] = useState<number>(4);
 
-  const toggleOpenCategoryFilter = () =>
-    setOpenCategoryFilter((openCategoryFilter) => !openCategoryFilter);
+  const searchParams = useSearchParams();
+  const category = searchParams.get("category");
+
+  const toggleOpenCategoryMenu = () =>
+    setOpenCategoryMenu((openCategoryMenu) => !openCategoryMenu);
 
   const handleSetGrid = (grid: number) => {
+    console.log("grid ", grid);
     setGrid(grid);
   };
 
   return (
-    <>
+    <div className="min-h-screen bg-cusgray pb-10">
       <button
-        onClick={toggleOpenCategoryFilter}
+        onClick={toggleOpenCategoryMenu}
         className="w-12 h-12 rounded-full bg-white fixed z-30 drop-shadow-2xl lg:hidden flex justify-center place-items-center bottom-0 left-0 m-5"
       >
         <svg
@@ -45,17 +52,21 @@ export default function Store() {
         </svg>
       </button>
       <div className="max-w-6xl mx-auto pt-14 md:px-0">
+        <TopSearch products={products} />
         <div className="grid grid-cols-4 gap-x-6">
           <div
-            onClick={toggleOpenCategoryFilter}
+            onClick={toggleOpenCategoryMenu}
             className={`${
-              openCategoryFilter ? `fixed` : `hidden`
-            } lg:static lg:inline bg-gray-400 lg:bg-cusgray h-screen bg-opacity-30 z-20 flex w-full justify-center place-items-center top-0 lg:p-4`}
+              openCategoryMenu ? `fixed` : `hidden`
+            } lg:static lg:inline lg:bg-cusgray h-screen bg-opacity-30 z-20 flex w-full justify-center place-items-center top-0 lg:p-4`}
           >
-            <CategoriesNav currentCategory="" categories={categories || []} />
+            <CategoriesNav
+              currentCategory={category}
+              categories={categories || []}
+            />
           </div>
           <div className="col-span-4 md:col-span-4 lg:col-span-3 flex flex-col py-4 mx-2 md:mx-0">
-            {/* <StoreCarousel /> */}
+            <StoreCarousel />
             <div className="rounded-2xl overflow-hidden shadow-lg w-full bg-white mt-6 px-5 py-4">
               <div className="mb-3">
                 <div className="flex justify-between place-items-center text-gray-600 text-sm relative">
@@ -63,15 +74,16 @@ export default function Store() {
                   <SortDropdown />
                 </div>
               </div>
-              <div
-                className={`grid grid-cols-2 md:grid-cols-${grid} lg:grid-cols-${grid} gap-x-4 gap-y-6`}
-              >
-                <ProductsList isLoading={isLoading} products={products} />
-              </div>
+
+              <ProductsList
+                isLoading={isLoading}
+                products={products}
+                grid={grid}
+              />
             </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
