@@ -24,7 +24,7 @@ export default function Home() {
       opacity: 1,
       y: 0,
       transition: {
-        ease: [0.6, 0.01, -0.05, 0.95],
+        ease: [0.6, 0.01, 0.05, 0.95],
         duration: 1,
       },
     },
@@ -32,7 +32,7 @@ export default function Home() {
       opacity: 0,
       y: -40,
       transition: {
-        ease: [0.6, 0.01, -0.05, 0.95],
+        ease: [0.6, 0.01, 0.05, 0.95],
         duration: 1,
       },
     },
@@ -57,7 +57,7 @@ export default function Home() {
                 );
               })}
             </div>
-            <Link href="/store/">
+            <Link href="/store">
               <motion.p
                 variants={letter}
                 className="flex justify-center w-full place-items-center text-black underline mt-5 text-sm font-normal cursor-pointer"

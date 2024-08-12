@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import MenuNav from "./menunav";
+import MenuNav from "./menu-nav";
 import { useState } from "react";
 import { storeName } from "@/utils/data";
 

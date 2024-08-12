@@ -1,6 +1,5 @@
 import { storeName } from "@/utils/data";
 import { Metadata } from "next";
-import Head from "next/head";
 
 export const metadata: Metadata = {
   title: `${storeName} | 404`,
