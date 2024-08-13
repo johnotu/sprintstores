@@ -5,9 +5,11 @@ import { useRouter } from "next/navigation";
 import MenuNav from "./menu-nav";
 import { useState } from "react";
 import { storeName } from "@/utils/data";
+import useCart from "@/hooks/use-cart";
 
 export default function Header() {
   const router = useRouter();
+  const { cart } = useCart();
 
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
 
@@ -72,6 +74,16 @@ export default function Header() {
                 d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
               />
             </svg>
+            {cart.length ? (
+              <div
+                className={`flex
+                } absolute text-xs font-light justify-center text-white text-center w-4 h-4 bg-cusblack rounded-full bottom-0 right-0`}
+              >
+                {cart.reduce((acc, product) => acc + product.quantity, 0)}
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

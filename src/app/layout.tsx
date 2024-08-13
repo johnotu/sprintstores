@@ -4,7 +4,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { storeDescription, storeName } from "@/utils/data";
 import Header from "@/components/header";
-import Animate from "@/providers/animate";
+import AnimationProvider from "@/providers/animation";
+import CartProvider from "@/providers/cart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Animate>
-          <div className="w-full h-screen relative bg-cusgray">
-            <Header />
-            {children}
-          </div>
-        </Animate>
+        <CartProvider>
+          <AnimationProvider>
+            <div className="w-full h-screen relative bg-cusgray">
+              <Header />
+              {children}
+            </div>
+          </AnimationProvider>
+        </CartProvider>
       </body>
     </html>
   );

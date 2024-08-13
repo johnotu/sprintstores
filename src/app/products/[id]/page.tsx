@@ -5,6 +5,9 @@ import useProduct from "./use-product";
 import { formatAmount } from "@/utils/functions";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useContext } from "react";
+import CartContext from "@/contexts/cart";
+import useCart from "@/hooks/use-cart";
 
 export default function Product({
   params: { id },
@@ -12,9 +15,10 @@ export default function Product({
   params: { id: string };
 }) {
   const { product, isLoading } = useProduct(id);
+  const { addToCart } = useCart();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>; // @TODO change to skeleton
   }
 
   if (product) {
@@ -83,22 +87,15 @@ export default function Product({
             </p>
             <div className="buttoncart flex mt-5 w-full">
               <button
-                // onClick={() => {
-                //   dispatch(
-                //     addToBasket({
-                //       ...dataItem,
-                //       selectedSizeProp: dataItem.prop[0].size[selectedSize],
-                //     })
-                //   );
-                // }}
+                onClick={() => addToCart({ ...product, quantity: 1 })}
                 className="w-4/5 md:w-3/5 bg-cusblack overflow-hidden py-4 text-white rounded-lg text-sm active:bg-gray-800 duration-100"
               >
-                <span
-                  // initial={{ y: -100 }}
-                  // animate={{ y: 0 }}
+                <motion.span
+                  initial={{ y: -100 }}
+                  animate={{ y: 0 }}
                   className="flex justify-center place-items-center overflow-hidden"
                 >
-                  Add to basket
+                  Add to cart
                   <span>
                     <svg
                       className="ml-2 w-5 h-5"
@@ -109,7 +106,7 @@ export default function Product({
                       <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                     </svg>
                   </span>
-                </span>
+                </motion.span>
               </button>
               <button
                 // onClick={() => dispatch(addToWishlist(item))}

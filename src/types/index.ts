@@ -14,3 +14,15 @@ export interface Product {
 }
 
 export type Category = string;
+
+export interface CartItem extends Product {
+  quantity: number;
+}
+
+export interface CartContextType {
+  cart: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
+  clearCart: () => void;
+}

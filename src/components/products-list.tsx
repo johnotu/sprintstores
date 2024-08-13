@@ -41,7 +41,6 @@ export default function ProductsList({
               <Image
                 height={700}
                 width={700}
-                // objectFit="contain"
                 loading="lazy"
                 src={image}
                 alt=""
