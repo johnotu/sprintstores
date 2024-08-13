@@ -9,6 +9,7 @@ import { storeDescription, storeName } from "@/utils/data";
 import Header from "@/components/header";
 import AnimationProvider from "@/providers/animation";
 import CartProvider from "@/providers/cart";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
               <Header />
               {children}
               <ToastContainer />
+              <Analytics />
             </div>
           </AnimationProvider>
         </CartProvider>
