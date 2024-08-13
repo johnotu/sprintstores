@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.min.css";
+
 import { storeDescription, storeName } from "@/utils/data";
 import Header from "@/components/header";
 import AnimationProvider from "@/providers/animation";
@@ -27,6 +30,7 @@ export default function RootLayout({
             <div className="w-full h-screen relative bg-cusgray">
               <Header />
               {children}
+              <ToastContainer />
             </div>
           </AnimationProvider>
         </CartProvider>
