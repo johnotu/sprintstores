@@ -35,5 +35,5 @@ export default function useProducts() {
     return () => requestController.abort();
   }, [category]);
 
-  return { products, isLoading };
+  return { products, isLoading, category };
 }

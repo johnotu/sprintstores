@@ -1,6 +1,6 @@
 "use client";
 
-import { Category, Product } from "@/types";
+import { Product } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -13,7 +13,6 @@ export default function TopSearch({ products }: { products: Product[] }) {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const searchText = e.target.value;
-    console.log("st: ", searchText);
     if (searchText.length) {
       const regex = new RegExp(searchText, "i");
       const filteredResult = products.filter((product) =>
@@ -43,7 +42,7 @@ export default function TopSearch({ products }: { products: Product[] }) {
           <div className="p-5 shadow-lg hidden duration-100 group-focus-within:inline group-active:inline top-11 bg-white absolute rounded-2xl w-full z-20">
             {filteredProducts.length ? (
               filteredProducts.map((product) => (
-                <Link href={`/product/${product.id}`} key={product.id}>
+                <Link href={`/products/${product.id}`} key={product.id}>
                   <div className="p-2 flex place-items-center cursor-pointer text-xs font-light text-cusblack hover:bg-gray-100 active:bg-gray-200">
                     <span>
                       <Image

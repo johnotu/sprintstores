@@ -3,15 +3,11 @@
 import { Product } from "@/types";
 import { API_BASEURL } from "@/utils/data";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function useProduct(id: string) {
   const [product, setProduct] = useState<Product>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const searchParams = useSearchParams();
-  const category = searchParams.get("category");
 
   useEffect(() => {
     const requestController = new AbortController();
