@@ -2,6 +2,7 @@
 
 import CartProduct from "@/components/cart-product";
 import useCart from "@/hooks/use-cart";
+import { formatAmount } from "@/utils/functions";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -88,7 +89,7 @@ export default function Cart() {
             <div className="text-sm pt-1 font-semibold pb-2 border-b border-cusblack flex justify-between place-items-center">
               <p className="">SUBTOTAL</p>
               <div>
-                <p>{cartValue}</p>
+                <p>{formatAmount(cartValue)}</p>
               </div>
             </div>
 
@@ -100,7 +101,7 @@ export default function Cart() {
                 >
                   <p className="pr-3">{item.title}</p>
                   <div>
-                    <p>{Number(item.price) * item.quantity}</p>
+                    <p>{formatAmount(Number(item.price) * item.quantity)}</p>
                   </div>
                 </div>
               ))}
@@ -113,7 +114,7 @@ export default function Cart() {
             <div className="flex justify-between place-items-center font-semibold">
               <p>TOTAL</p>
               <div>
-                <p>{cartValue}</p>
+                <p>{formatAmount(cartValue)}</p>
               </div>
             </div>
 
