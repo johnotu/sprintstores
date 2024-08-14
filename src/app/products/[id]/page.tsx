@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useContext } from "react";
 import CartContext from "@/contexts/cart";
 import useCart from "@/hooks/use-cart";
+import { SkeletonLoader } from "@/components/products-loader";
 
 export default function Product({
   params: { id },
@@ -18,7 +19,12 @@ export default function Product({
   const { addToCart } = useCart();
 
   if (isLoading) {
-    return <div>Loading...</div>; // @TODO change to skeleton
+    return (
+      <>
+        <SkeletonLoader />
+        <SkeletonLoader />
+      </>
+    );
   }
 
   if (product) {
